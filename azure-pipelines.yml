@@ -4,9 +4,7 @@ trigger:
       - main
       - master
       - release/*
-  tags:
-    include:
-      - R*
+      - refs/tags/R*
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -15,8 +13,8 @@ steps:
   - task: Checkout@1
     displayName: 'Checkout code from GitHub'
 
-  - script: echo "Running CI pipeline on $(Build.SourceBranchName)"
-    displayName: 'Run CI Job'
+  - script: echo "Triggered on $(Build.SourceBranch)"
+    displayName: 'Print Trigger Info'
 
   - script: |
       echo "Building the project..."
