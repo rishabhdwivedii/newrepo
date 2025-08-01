@@ -1,0 +1,26 @@
+trigger:
+  branches:
+    include:
+      - main
+      - master
+      - release/*
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: Checkout@1
+    displayName: 'Checkout code from GitHub'
+
+  - script: echo "Running CI pipeline on $(Build.SourceBranchName)"
+    displayName: 'Run CI Job'
+
+  - script: |
+      echo "Building the project..."
+      # Add your build commands here
+    displayName: 'Build Step'
+
+  - script: |
+      echo "Running tests..."
+      # Add your test commands here
+    displayName: 'Test Step'
