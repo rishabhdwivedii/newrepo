@@ -5,6 +5,20 @@ trigger:
       - master
       - release/*
 
+pr:
+  branches:
+    include:
+      - main
+      - master
+      - release/*
+
+# Tag trigger using pipeline resources
+resources:
+  repositories:
+    - repository: self
+      type: github
+      ref: refs/tags/R*
+
 pool:
   vmImage: 'ubuntu-latest'
 
@@ -12,8 +26,8 @@ steps:
   - task: Checkout@1
     displayName: 'Checkout code from GitHub'
 
-  - script: echo "Running CI pipeline on $(Build.SourceBranchName)"
-    displayName: 'Run CI Job'
+  - script: echo "Triggered from branch or tag: $(Build.SourceBranch)"
+    displayName: 'Show Trigger Info'
 
   - script: |
       echo "Building the project..."
